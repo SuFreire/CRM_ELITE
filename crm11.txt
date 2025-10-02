@@ -1,0 +1,1929 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Elite - Sistema de Gestão Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .luxury-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .luxury-gradient-alt {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .luxury-gradient-green {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .luxury-gradient-gold {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .card-hover:hover { 
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .luxury-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .luxury-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .luxury-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+        
+        .luxury-input {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .luxury-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .sidebar-gradient {
+            background: linear-gradient(180deg, #2d3748 0%, #1a202c 100%);
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        .luxury-shadow {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-backdrop {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .status-em-negociacao { 
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            color: #e17055;
+        }
+        
+        .status-proposta-enviada { 
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+        }
+        
+        .status-ganho { 
+            background: linear-gradient(135deg, #00b894, #00cec9);
+            color: white;
+        }
+        
+        .status-perdido { 
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+            color: white;
+        }
+        
+        .status-novo { 
+            background: linear-gradient(135deg, #ddd6fe, #c4b5fd);
+            color: #6d28d9;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="glass-effect border-b border-white/20 luxury-shadow sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 luxury-gradient rounded-2xl flex items-center justify-center luxury-shadow">
+                        <span class="text-white text-xl font-bold">💎</span>
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold gradient-text">CRM Elite</h1>
+                        <p class="text-sm text-gray-600 font-medium">Sistema de Gestão Premium</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-gray-700 font-medium">Bem-vinda, <span class="gradient-text font-bold">Susana</span></span>
+                        <div class="w-12 h-12 luxury-gradient rounded-2xl flex items-center justify-center cursor-pointer hover:shadow-lg transition-all group">
+                            <span class="text-white text-xl group-hover:scale-110 transition-transform">👤</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <nav class="w-80 sidebar-gradient luxury-shadow relative">
+            <div class="p-8">
+                <div class="space-y-3">
+                    <button onclick="showTab('dashboard')" id="tab-dashboard" class="w-full text-left px-6 py-4 text-white luxury-gradient rounded-2xl font-semibold flex items-center space-x-4 hover:shadow-lg transition-all group">
+                        <span class="text-2xl group-hover:scale-110 transition-transform">📊</span>
+                        <span class="text-lg">Dashboard</span>
+                    </button>
+                    <button onclick="showTab('contactos')" id="tab-contactos" class="w-full text-left px-6 py-4 text-gray-300 hover:text-white hover:bg-white/10 rounded-2xl font-semibold flex items-center space-x-4 transition-all group">
+                        <span class="text-2xl group-hover:scale-110 transition-transform">👥</span>
+                        <span class="text-lg">Contactos</span>
+                    </button>
+                    <button onclick="showTab('atividades')" id="tab-atividades" class="w-full text-left px-6 py-4 text-gray-300 hover:text-white hover:bg-white/10 rounded-2xl font-semibold flex items-center space-x-4 transition-all group">
+                        <span class="text-2xl group-hover:scale-110 transition-transform">📝</span>
+                        <span class="text-lg">Atividades</span>
+                    </button>
+                    <button onclick="showTab('vendas')" id="tab-vendas" class="w-full text-left px-6 py-4 text-gray-300 hover:text-white hover:bg-white/10 rounded-2xl font-semibold flex items-center space-x-4 transition-all group">
+                        <span class="text-2xl group-hover:scale-110 transition-transform">💰</span>
+                        <span class="text-lg">Vendas</span>
+                    </button>
+                    <button onclick="showTab('empreendimentos')" id="tab-empreendimentos" class="w-full text-left px-6 py-4 text-gray-300 hover:text-white hover:bg-white/10 rounded-2xl font-semibold flex items-center space-x-4 transition-all group">
+                        <span class="text-2xl group-hover:scale-110 transition-transform">🏢</span>
+                        <span class="text-lg">Empreendimentos</span>
+                    </button>
+                </div>
+                
+                <!-- Botão de Backup Destacado -->
+                <div class="mt-8">
+                    <button onclick="showBackupModal()" class="w-full luxury-gradient text-white px-6 py-5 rounded-2xl font-bold text-lg hover:shadow-xl transition-all flex items-center justify-center space-x-4 relative group">
+                        <span class="text-3xl group-hover:scale-110 transition-transform">💾</span>
+                        <span>Sistema de Backup</span>
+                        <span id="backup-indicator" class="absolute -top-2 -right-2 w-5 h-5 bg-emerald-400 rounded-full animate-pulse-slow shadow-lg border-2 border-white"></span>
+                    </button>
+                    <p class="text-center text-gray-400 text-sm mt-3 font-medium">Backup automático ativo</p>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-1 px-8 py-8 overflow-y-auto scrollbar-hide">
+            <!-- Dashboard Tab -->
+            <div id="dashboard-content" class="tab-content">
+                <div class="mb-10">
+                    <h2 class="text-4xl font-bold text-white mb-3">Dashboard Elite</h2>
+                    <p class="text-white/80 text-lg font-medium">Visão premium do desempenho da equipa</p>
+                </div>
+
+                <!-- KPI Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                    <div class="luxury-card rounded-3xl p-8 card-hover">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-16 h-16 luxury-gradient-green rounded-2xl flex items-center justify-center">
+                                <span class="text-3xl">💰</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Vendas Totais</p>
+                                <p class="text-3xl font-bold gradient-text" id="total-vendas">€0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="luxury-card rounded-3xl p-8 card-hover">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-16 h-16 luxury-gradient rounded-2xl flex items-center justify-center">
+                                <span class="text-3xl">🎯</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Negócios Fechados</p>
+                                <p class="text-3xl font-bold gradient-text" id="negocios-fechados">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="luxury-card rounded-3xl p-8 card-hover">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-16 h-16 luxury-gradient-gold rounded-2xl flex items-center justify-center">
+                                <span class="text-3xl">⏳</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Em Negociação</p>
+                                <p class="text-3xl font-bold gradient-text" id="em-negociacao">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="luxury-card rounded-3xl p-8 card-hover">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-16 h-16 luxury-gradient-alt rounded-2xl flex items-center justify-center">
+                                <span class="text-3xl">👥</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Contactos Ativos</p>
+                                <p class="text-3xl font-bold gradient-text" id="contactos-ativos">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendário -->
+                <div class="luxury-card rounded-3xl p-8 luxury-shadow">
+                    <div class="flex justify-between items-center mb-8">
+                        <h3 class="text-2xl font-bold gradient-text flex items-center space-x-3">
+                            <span class="text-3xl">📅</span>
+                            <span>Calendário Elite</span>
+                        </h3>
+                        <button onclick="openGoogleCalendar()" class="luxury-button text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-xl transition-all flex items-center space-x-3">
+                            <span class="text-2xl">📅</span>
+                            <span>Ver Google Calendar</span>
+                        </button>
+                    </div>
+                    
+                    <div class="luxury-gradient-gold rounded-2xl p-6">
+                        <h4 class="font-bold text-gray-800 mb-4 text-xl flex items-center space-x-2">
+                            <span class="text-2xl">🔔</span>
+                            <span>Lembretes Premium de Hoje</span>
+                        </h4>
+                        <div id="today-reminders" class="space-y-4">
+                            <div class="bg-white/80 rounded-xl p-4 border-l-4 border-orange-500">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <div class="font-bold text-gray-800 flex items-center space-x-2">
+                                            <span class="text-xl">📞</span>
+                                            <span>Chamada - João Silva</span>
+                                        </div>
+                                        <div class="text-sm text-gray-600 mt-2 font-medium">📅 Hoje às 14:00</div>
+                                        <div class="text-sm text-gray-700 mt-1 italic">💬 Discussão sobre apartamento T3</div>
+                                    </div>
+                                    <button onclick="this.parentElement.parentElement.remove()" class="ml-4 text-gray-500 hover:text-red-600 font-bold text-lg transition-colors">✕</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contactos Tab -->
+            <div id="contactos-content" class="tab-content hidden">
+                <div class="flex justify-between items-center mb-10">
+                    <div>
+                        <h2 class="text-4xl font-bold text-white mb-3">Gestão Elite de Clientes</h2>
+                        <p class="text-white/80 text-lg font-medium">Organize e acompanhe todos os seus clientes premium</p>
+                    </div>
+                    <button onclick="showAddContactModal()" class="luxury-button text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-xl transition-all flex items-center space-x-3">
+                        <span class="text-2xl">✨</span>
+                        <span>Novo Contacto</span>
+                    </button>
+                </div>
+
+                <!-- Filtros -->
+                <div class="luxury-card rounded-3xl p-8 mb-8 luxury-shadow">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                        <select id="filter-tipologia" class="luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none" onchange="filterContactos()">
+                            <option value="">Todas as Tipologias</option>
+                            <option value="T0">T0</option>
+                            <option value="T1">T1</option>
+                            <option value="T2">T2</option>
+                            <option value="T3">T3</option>
+                            <option value="T4">T4</option>
+                            <option value="T5+">T5+</option>
+                        </select>
+                        <select id="filter-tipo-negocio" class="luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none" onchange="filterContactos()">
+                            <option value="">Tipo de Negócio</option>
+                            <option value="compra">Compra</option>
+                            <option value="venda">Venda</option>
+                            <option value="arrendamento">Arrendamento</option>
+                            <option value="investimento">Investimento</option>
+                        </select>
+                        <select id="filter-tipo-imovel" class="luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none" onchange="filterContactos()">
+                            <option value="">Tipo de Imóvel</option>
+                            <option value="apartamento">Apartamento</option>
+                            <option value="moradia">Moradia</option>
+                            <option value="garagem">Garagem</option>
+                            <option value="loja">Loja</option>
+                            <option value="armazem">Armazém</option>
+                            <option value="terreno">Terreno</option>
+                        </select>
+                        <select id="filter-preco" class="luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none" onchange="filterContactos()">
+                            <option value="">Todas as Faixas de Preço</option>
+                            <option value="0-100000">Até €100.000</option>
+                            <option value="100000-200000">€100.000 - €200.000</option>
+                            <option value="200000-300000">€200.000 - €300.000</option>
+                            <option value="300000-500000">€300.000 - €500.000</option>
+                            <option value="500000-999999">€500.000+</option>
+                        </select>
+                        <input type="text" id="search-contactos" placeholder="🔍 Pesquisar clientes..." class="luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none" oninput="filterContactos()">
+                    </div>
+                </div>
+
+                <!-- Lista de Contactos -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="contactos-grid">
+                    <!-- Contactos serão renderizados aqui -->
+                </div>
+            </div>
+
+            <!-- Atividades Tab -->
+            <div id="atividades-content" class="tab-content hidden">
+                <div class="flex justify-between items-center mb-10">
+                    <div>
+                        <h2 class="text-4xl font-bold text-white mb-3">Registo Elite de Atividades</h2>
+                        <p class="text-white/80 text-lg font-medium">Acompanhe todas as interações premium com clientes</p>
+                    </div>
+                    <button onclick="showAddActivityModal()" class="luxury-button text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-xl transition-all flex items-center space-x-3">
+                        <span class="text-2xl">📝</span>
+                        <span>Nova Atividade</span>
+                    </button>
+                </div>
+
+                <!-- Timeline de Atividades -->
+                <div class="luxury-card rounded-3xl p-8 luxury-shadow">
+                    <div class="space-y-8" id="atividades-timeline">
+                        <!-- Atividades serão renderizadas aqui -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vendas Tab -->
+            <div id="vendas-content" class="tab-content hidden">
+                <div class="flex justify-between items-center mb-10">
+                    <div>
+                        <h2 class="text-4xl font-bold text-white mb-3">Acompanhamento Elite de Vendas</h2>
+                        <p class="text-white/80 text-lg font-medium">Gerir o funil premium de vendas e oportunidades</p>
+                    </div>
+                    <button onclick="showAddSaleModal()" class="luxury-button text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-xl transition-all flex items-center space-x-3">
+                        <span class="text-2xl">💎</span>
+                        <span>Nova Oportunidade</span>
+                    </button>
+                </div>
+
+                <!-- Funil de Vendas -->
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-10">
+                    <!-- Novo -->
+                    <div class="luxury-card rounded-3xl overflow-hidden luxury-shadow">
+                        <div class="p-6 luxury-gradient-alt text-white">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-lg flex items-center space-x-2">
+                                    <span class="text-2xl">🆕</span>
+                                    <span>Novo</span>
+                                </h3>
+                                <span class="bg-white/20 text-white px-3 py-1 rounded-full text-sm font-bold" id="count-novo">0</span>
+                            </div>
+                            <p class="text-white/80 text-sm font-medium mb-3">Primeiros contactos</p>
+                            <p class="text-2xl font-bold" id="total-novo">€0</p>
+                        </div>
+                        <div class="p-4 space-y-3 min-h-[200px] bg-white" id="funil-novo">
+                            <div class="p-8 text-center text-gray-400">
+                                <p class="font-medium">Nenhum cliente nesta fase</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Em Negociação -->
+                    <div class="luxury-card rounded-3xl overflow-hidden luxury-shadow">
+                        <div class="p-6 luxury-gradient-gold text-gray-800">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-lg flex items-center space-x-2">
+                                    <span class="text-2xl">💬</span>
+                                    <span>Em Negociação</span>
+                                </h3>
+                                <span class="bg-white/30 text-gray-800 px-3 py-1 rounded-full text-sm font-bold" id="count-negociacao">0</span>
+                            </div>
+                            <p class="text-gray-700 text-sm font-medium mb-3">Discussão ativa</p>
+                            <p class="text-2xl font-bold" id="total-negociacao">€0</p>
+                        </div>
+                        <div class="p-4 space-y-3 min-h-[200px] bg-white" id="funil-negociacao">
+                            <div class="p-8 text-center text-gray-400">
+                                <p class="font-medium">Nenhum cliente nesta fase</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proposta Enviada -->
+                    <div class="luxury-card rounded-3xl overflow-hidden luxury-shadow">
+                        <div class="p-6 luxury-gradient text-white">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-lg flex items-center space-x-2">
+                                    <span class="text-2xl">📋</span>
+                                    <span>Proposta Enviada</span>
+                                </h3>
+                                <span class="bg-white/20 text-white px-3 py-1 rounded-full text-sm font-bold" id="count-proposta">0</span>
+                            </div>
+                            <p class="text-white/80 text-sm font-medium mb-3">Aguardando resposta</p>
+                            <p class="text-2xl font-bold" id="total-proposta">€0</p>
+                        </div>
+                        <div class="p-4 space-y-3 min-h-[200px] bg-white" id="funil-proposta">
+                            <div class="p-8 text-center text-gray-400">
+                                <p class="font-medium">Nenhum cliente nesta fase</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ganho -->
+                    <div class="luxury-card rounded-3xl overflow-hidden luxury-shadow">
+                        <div class="p-6 luxury-gradient-green text-white">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-lg flex items-center space-x-2">
+                                    <span class="text-2xl">✅</span>
+                                    <span>Ganho</span>
+                                </h3>
+                                <span class="bg-white/20 text-white px-3 py-1 rounded-full text-sm font-bold" id="count-ganho">0</span>
+                            </div>
+                            <p class="text-white/80 text-sm font-medium mb-3">Negócios fechados</p>
+                            <p class="text-2xl font-bold" id="total-ganho">€0</p>
+                        </div>
+                        <div class="p-4 space-y-3 min-h-[200px] bg-white" id="funil-ganho">
+                            <div class="p-8 text-center text-gray-400">
+                                <p class="font-medium">Nenhum cliente nesta fase</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Perdido -->
+                    <div class="luxury-card rounded-3xl overflow-hidden luxury-shadow">
+                        <div class="p-6 bg-gradient-to-br from-red-400 to-pink-500 text-white">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-lg flex items-center space-x-2">
+                                    <span class="text-2xl">❌</span>
+                                    <span>Perdido</span>
+                                </h3>
+                                <span class="bg-white/20 text-white px-3 py-1 rounded-full text-sm font-bold" id="count-perdido">0</span>
+                            </div>
+                            <p class="text-white/80 text-sm font-medium mb-3">Oportunidades perdidas</p>
+                            <p class="text-2xl font-bold text-white/70" id="total-perdido">€0</p>
+                        </div>
+                        <div class="p-4 space-y-3 min-h-[200px] bg-white" id="funil-perdido">
+                            <div class="p-8 text-center text-gray-400">
+                                <p class="font-medium">Nenhum cliente nesta fase</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabela Detalhada -->
+                <div class="luxury-card rounded-3xl p-8 luxury-shadow">
+                    <h3 class="text-2xl font-bold gradient-text mb-6">Todas as Oportunidades Premium</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="border-b-2 border-gray-200">
+                                    <th class="text-left py-4 px-6 font-bold text-gray-700 text-lg">Cliente</th>
+                                    <th class="text-left py-4 px-6 font-bold text-gray-700 text-lg">Valor</th>
+                                    <th class="text-left py-4 px-6 font-bold text-gray-700 text-lg">Estado</th>
+                                    <th class="text-left py-4 px-6 font-bold text-gray-700 text-lg">Data</th>
+                                    <th class="text-left py-4 px-6 font-bold text-gray-700 text-lg">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vendas-table">
+                                <tr>
+                                    <td colspan="5" class="py-12 text-center text-gray-400">
+                                        <div class="text-4xl mb-4">💎</div>
+                                        <p class="text-lg font-medium">Nenhuma oportunidade registada</p>
+                                        <p class="text-sm mt-2">Clique em "Nova Oportunidade" para começar</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empreendimentos Tab -->
+            <div id="empreendimentos-content" class="tab-content hidden">
+                <div class="flex justify-between items-center mb-10">
+                    <div>
+                        <h2 class="text-4xl font-bold text-white mb-3">Gestão Elite de Empreendimentos</h2>
+                        <p class="text-white/80 text-lg font-medium">Gerir empresas e investidores premium</p>
+                    </div>
+                    <button onclick="showAddCompanyModal()" class="luxury-gradient-green text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-xl transition-all flex items-center space-x-3">
+                        <span class="text-2xl">🏢</span>
+                        <span>Nova Empresa</span>
+                    </button>
+                </div>
+
+                <!-- Lista de Empresas -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="companies-grid">
+                    <!-- Empresas serão renderizadas aqui -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Novo Contacto -->
+    <div id="contact-modal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50">
+        <div class="luxury-card rounded-3xl p-8 w-full max-w-lg mx-4 luxury-shadow">
+            <h3 class="text-2xl font-bold gradient-text mb-6 flex items-center space-x-3">
+                <span class="text-3xl">✨</span>
+                <span>Novo Cliente Premium</span>
+            </h3>
+            <form id="contact-form" onsubmit="addContact(event)">
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Nome Completo</label>
+                        <input type="text" id="nome-cliente" required class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Telemóvel</label>
+                        <input type="tel" id="telemovel" required class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">E-mail</label>
+                        <input type="email" id="email" required class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Tipologia</label>
+                            <select id="tipologia" required class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                                <option value="">Selecionar</option>
+                                <option value="T0">T0</option>
+                                <option value="T1">T1</option>
+                                <option value="T2">T2</option>
+                                <option value="T3">T3</option>
+                                <option value="T4">T4</option>
+                                <option value="T5+">T5+</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Valor Máximo (€)</label>
+                            <input type="number" id="valor-maximo" class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Tipo de Negócio</label>
+                            <select id="tipo-negocio" required class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                                <option value="">Selecionar</option>
+                                <option value="compra">Compra</option>
+                                <option value="venda">Venda</option>
+                                <option value="arrendamento">Arrendamento</option>
+                                <option value="investimento">Investimento</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Tipo de Imóvel</label>
+                            <select id="tipo-imovel" required class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                                <option value="">Selecionar</option>
+                                <option value="apartamento">Apartamento</option>
+                                <option value="moradia">Moradia</option>
+                                <option value="garagem">Garagem</option>
+                                <option value="loja">Loja</option>
+                                <option value="armazem">Armazém</option>
+                                <option value="terreno">Terreno</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex space-x-4 mt-8">
+                    <button type="button" onclick="hideContactModal()" class="flex-1 luxury-card text-gray-700 py-3 px-6 rounded-xl font-bold hover:shadow-lg transition-all">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="flex-1 luxury-button text-white py-3 px-6 rounded-xl font-bold">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Nova Atividade -->
+    <div id="activity-modal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50">
+        <div class="luxury-card rounded-3xl p-8 w-full max-w-lg mx-4 luxury-shadow">
+            <h3 class="text-2xl font-bold gradient-text mb-6 flex items-center space-x-3">
+                <span class="text-3xl">📝</span>
+                <span>Nova Atividade Premium</span>
+            </h3>
+            <form id="activity-form" onsubmit="addActivity(event)">
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Cliente</label>
+                        <select id="cliente-atividade" required class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                            <option value="">Selecionar cliente</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Tipo de Atividade</label>
+                        <select id="tipo-atividade" required class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                            <option value="">Selecionar tipo</option>
+                            <option value="chamada">Chamada Telefónica</option>
+                            <option value="reuniao">Reunião</option>
+                            <option value="email">E-mail</option>
+                            <option value="visita">Visita</option>
+                            <option value="visualizacao">Visualização</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Comentários</label>
+                        <textarea id="comentarios-atividade" rows="4" required placeholder="Descreva a atividade realizada com este cliente..." class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none"></textarea>
+                    </div>
+                </div>
+                <div class="flex space-x-4 mt-8">
+                    <button type="button" onclick="hideActivityModal()" class="flex-1 luxury-card text-gray-700 py-3 px-6 rounded-xl font-bold hover:shadow-lg transition-all">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="flex-1 luxury-button text-white py-3 px-6 rounded-xl font-bold">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Nova Venda -->
+    <div id="sale-modal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50">
+        <div class="luxury-card rounded-3xl p-8 w-full max-w-lg mx-4 luxury-shadow">
+            <h3 class="text-2xl font-bold gradient-text mb-6 flex items-center space-x-3">
+                <span class="text-3xl">💎</span>
+                <span>Nova Oportunidade Premium</span>
+            </h3>
+            <form id="sale-form" onsubmit="addSale(event)">
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Cliente</label>
+                        <select id="cliente-venda" required class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                            <option value="">Selecionar cliente</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Valor (€)</label>
+                        <input type="number" id="valor-venda" step="0.01" required class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Estado</label>
+                        <select id="estado-venda" required class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                            <option value="novo">Novo</option>
+                            <option value="em-negociacao">Em Negociação</option>
+                            <option value="proposta-enviada">Proposta Enviada</option>
+                            <option value="ganho">Ganho</option>
+                            <option value="perdido">Perdido</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Descrição</label>
+                        <textarea id="descricao-venda" rows="3" class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none"></textarea>
+                    </div>
+                </div>
+                <div class="flex space-x-4 mt-8">
+                    <button type="button" onclick="hideSaleModal()" class="flex-1 luxury-card text-gray-700 py-3 px-6 rounded-xl font-bold hover:shadow-lg transition-all">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="flex-1 luxury-button text-white py-3 px-6 rounded-xl font-bold">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Nova Empresa -->
+    <div id="company-modal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50">
+        <div class="luxury-card rounded-3xl p-8 w-full max-w-lg mx-4 luxury-shadow">
+            <h3 class="text-2xl font-bold gradient-text mb-6 flex items-center space-x-3">
+                <span class="text-3xl">🏢</span>
+                <span>Nova Empresa Premium</span>
+            </h3>
+            <form id="company-form" onsubmit="addCompany(event)">
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Nome da Empresa</label>
+                        <input type="text" id="nome-empresa" required class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Telefone</label>
+                        <input type="tel" id="telefone-empresa" required class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">E-mail</label>
+                        <input type="email" id="email-empresa" required class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Morada</label>
+                        <input type="text" id="morada-empresa" placeholder="Rua, número, código postal, cidade" class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Website</label>
+                        <input type="url" id="website-empresa" placeholder="https://www.exemplo.pt" class="w-full luxury-input rounded-xl px-4 py-3 font-medium focus:outline-none">
+                    </div>
+                </div>
+                <div class="flex space-x-4 mt-8">
+                    <button type="button" onclick="hideCompanyModal()" class="flex-1 luxury-card text-gray-700 py-3 px-6 rounded-xl font-bold hover:shadow-lg transition-all">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="flex-1 luxury-gradient-green text-white py-3 px-6 rounded-xl font-bold">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Sistema de Backup -->
+    <div id="backup-modal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50">
+        <div class="luxury-card rounded-3xl p-8 w-full max-w-4xl mx-4 max-h-[90vh] overflow-y-auto scrollbar-hide luxury-shadow">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-3xl font-bold gradient-text flex items-center space-x-3">
+                    <span class="text-4xl">💾</span>
+                    <span>Sistema de Backup Elite</span>
+                </h3>
+                <button onclick="hideBackupModal()" class="text-gray-400 hover:text-gray-600 text-2xl font-bold transition-colors">✕</button>
+            </div>
+            
+            <!-- Status do Backup -->
+            <div class="luxury-gradient-green rounded-2xl p-6 mb-8 text-white">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="font-bold text-xl flex items-center space-x-2">
+                            <span class="text-2xl">🔄</span>
+                            <span>Backup Automático Premium Ativo</span>
+                        </h4>
+                        <p class="text-white/90 mt-2 font-medium">Último backup: <span id="last-backup-time">Nunca</span></p>
+                        <p class="text-white/80 text-sm mt-1">Backup automático: A cada 30 segundos</p>
+                    </div>
+                    <div class="text-4xl">✅</div>
+                </div>
+            </div>
+
+            <!-- Ações Principais -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <button onclick="createManualBackup()" class="luxury-card hover:shadow-xl border-2 border-blue-200 rounded-2xl p-6 text-center transition-all group">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">💾</div>
+                    <h4 class="font-bold text-blue-800 text-lg">Criar Backup Manual</h4>
+                    <p class="text-blue-600 text-sm mt-2">Fazer backup imediato dos dados</p>
+                </button>
+                
+                <label class="luxury-card hover:shadow-xl border-2 border-orange-200 rounded-2xl p-6 text-center transition-all cursor-pointer group">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">📤</div>
+                    <h4 class="font-bold text-orange-800 text-lg">Importar Backup</h4>
+                    <p class="text-orange-600 text-sm mt-2">Carregar ficheiro externo</p>
+                    <input type="file" id="restore-backup-input" accept=".json" class="hidden" onchange="restoreFromFile(event)">
+                </label>
+            </div>
+
+            <!-- Lista de Backups -->
+            <div class="luxury-card rounded-2xl p-6 mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h4 class="font-bold text-gray-900 text-xl flex items-center space-x-2">
+                        <span class="text-2xl">📋</span>
+                        <span>Histórico de Backups (Últimos 20)</span>
+                    </h4>
+                    <button onclick="refreshBackupList()" class="luxury-button text-white px-4 py-2 rounded-xl font-bold text-sm hover:shadow-lg transition-all">
+                        🔄 Atualizar
+                    </button>
+                </div>
+                <div class="max-h-96 overflow-y-auto scrollbar-hide" id="backup-list">
+                    <!-- Lista de backups será renderizada aqui -->
+                </div>
+            </div>
+
+            <!-- Informações do Sistema -->
+            <div class="luxury-card rounded-2xl p-6">
+                <h4 class="font-bold text-gray-900 mb-4 text-xl flex items-center space-x-2">
+                    <span class="text-2xl">ℹ️</span>
+                    <span>Informações do Sistema Elite</span>
+                </h4>
+                <div class="grid grid-cols-2 gap-6 text-lg">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600 font-medium">Contactos:</span>
+                        <span class="font-bold gradient-text" id="info-contactos">0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600 font-medium">Empresas:</span>
+                        <span class="font-bold gradient-text" id="info-empresas">0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600 font-medium">Atividades:</span>
+                        <span class="font-bold gradient-text" id="info-atividades">0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600 font-medium">Vendas:</span>
+                        <span class="font-bold gradient-text" id="info-vendas">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variáveis globais
+        let contactos = [];
+        let empresas = [];
+        let atividades = [];
+        let vendas = [];
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFromLocalStorage();
+            initializeData();
+            renderAll();
+            updateDashboard();
+            populateClientSelects();
+            startAutoBackup();
+        });
+
+        // Sistema de LocalStorage
+        function saveToLocalStorage() {
+            try {
+                localStorage.setItem('crm_contactos', JSON.stringify(contactos));
+                localStorage.setItem('crm_empresas', JSON.stringify(empresas));
+                localStorage.setItem('crm_atividades', JSON.stringify(atividades.map(a => ({
+                    ...a,
+                    data: a.data.toISOString()
+                }))));
+                localStorage.setItem('crm_vendas', JSON.stringify(vendas));
+                console.log('✅ Dados guardados no localStorage');
+            } catch (error) {
+                console.error('❌ Erro ao guardar dados:', error);
+            }
+        }
+
+        function loadFromLocalStorage() {
+            try {
+                const savedContactos = localStorage.getItem('crm_contactos');
+                const savedEmpresas = localStorage.getItem('crm_empresas');
+                const savedAtividades = localStorage.getItem('crm_atividades');
+                const savedVendas = localStorage.getItem('crm_vendas');
+
+                if (savedContactos) contactos = JSON.parse(savedContactos);
+                if (savedEmpresas) empresas = JSON.parse(savedEmpresas);
+                if (savedAtividades) {
+                    const atividadesData = JSON.parse(savedAtividades);
+                    atividades = atividadesData.map(a => ({
+                        ...a,
+                        data: new Date(a.data)
+                    }));
+                }
+                if (savedVendas) vendas = JSON.parse(savedVendas);
+
+                console.log('✅ Dados carregados do localStorage');
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados:', error);
+            }
+        }
+
+        function initializeData() {
+            if (contactos.length === 0) {
+                contactos = [
+                    { id: 1, nome: 'João Silva', telemovel: '+351 912 345 678', email: 'joao.silva@email.pt', tipologia: 'T3', valorMaximo: 250000, tipoNegocio: 'compra', tipoImovel: 'apartamento', status: 'Ativo' },
+                    { id: 2, nome: 'Maria Costa', telemovel: '+351 923 456 789', email: 'maria.costa@email.pt', tipologia: 'T4', valorMaximo: 350000, tipoNegocio: 'venda', tipoImovel: 'moradia', status: 'Potencial' }
+                ];
+            }
+
+            if (empresas.length === 0) {
+                empresas = [
+                    { id: 1, nome: 'Investimentos Porto Lda', telefone: '+351 220 123 456', email: 'geral@investporto.pt', morada: 'Rua de Santa Catarina, 123, 4000-450 Porto', website: 'https://www.investporto.pt', status: 'Ativo' }
+                ];
+            }
+
+            if (atividades.length === 0) {
+                atividades = [
+                    { id: 1, tipo: 'chamada', cliente: 'João Silva', vendedor: 'Gestor', descricao: 'Discussão sobre apartamento T3 em Lisboa. Cliente interessado.', data: new Date() }
+                ];
+            }
+
+            if (vendas.length === 0) {
+                vendas = [
+                    { id: 1, cliente: 'João Silva', valor: 250000, estado: 'em-negociacao', vendedor: 'Gestor', data: new Date().toLocaleDateString('pt-PT') }
+                ];
+            }
+        }
+
+        // Navegação entre tabs
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            document.querySelectorAll('nav button').forEach(tab => {
+                tab.classList.remove('luxury-gradient', 'text-white', 'shadow-lg');
+                tab.classList.add('text-gray-300', 'hover:text-white', 'hover:bg-white/10');
+            });
+            
+            document.getElementById(tabName + '-content').classList.remove('hidden');
+            
+            const activeTab = document.getElementById('tab-' + tabName);
+            activeTab.classList.add('luxury-gradient', 'text-white', 'shadow-lg');
+            activeTab.classList.remove('text-gray-300', 'hover:text-white', 'hover:bg-white/10');
+        }
+
+        // Modais
+        function showAddContactModal() {
+            document.getElementById('contact-modal').classList.remove('hidden');
+            document.getElementById('contact-modal').classList.add('flex');
+        }
+
+        function hideContactModal() {
+            document.getElementById('contact-modal').classList.add('hidden');
+            document.getElementById('contact-modal').classList.remove('flex');
+            document.getElementById('contact-form').reset();
+        }
+
+        function showAddActivityModal() {
+            document.getElementById('activity-modal').classList.remove('hidden');
+            document.getElementById('activity-modal').classList.add('flex');
+        }
+
+        function hideActivityModal() {
+            document.getElementById('activity-modal').classList.add('hidden');
+            document.getElementById('activity-modal').classList.remove('flex');
+            document.getElementById('activity-form').reset();
+        }
+
+        function showAddSaleModal() {
+            document.getElementById('sale-modal').classList.remove('hidden');
+            document.getElementById('sale-modal').classList.add('flex');
+        }
+
+        function hideSaleModal() {
+            document.getElementById('sale-modal').classList.add('hidden');
+            document.getElementById('sale-modal').classList.remove('flex');
+            document.getElementById('sale-form').reset();
+        }
+
+        function showAddCompanyModal() {
+            document.getElementById('company-modal').classList.remove('hidden');
+            document.getElementById('company-modal').classList.add('flex');
+        }
+
+        function hideCompanyModal() {
+            document.getElementById('company-modal').classList.add('hidden');
+            document.getElementById('company-modal').classList.remove('flex');
+            document.getElementById('company-form').reset();
+        }
+
+        function showBackupModal() {
+            document.getElementById('backup-modal').classList.remove('hidden');
+            document.getElementById('backup-modal').classList.add('flex');
+            updateBackupInfo();
+            renderBackupList();
+        }
+
+        function hideBackupModal() {
+            document.getElementById('backup-modal').classList.add('hidden');
+            document.getElementById('backup-modal').classList.remove('flex');
+        }
+
+        // Adicionar contacto
+        function addContact(event) {
+            event.preventDefault();
+            
+            const novoContacto = {
+                id: Date.now(),
+                nome: document.getElementById('nome-cliente').value,
+                telemovel: document.getElementById('telemovel').value,
+                email: document.getElementById('email').value,
+                tipologia: document.getElementById('tipologia').value,
+                valorMaximo: parseInt(document.getElementById('valor-maximo').value) || 0,
+                tipoNegocio: document.getElementById('tipo-negocio').value,
+                tipoImovel: document.getElementById('tipo-imovel').value,
+                status: 'Potencial'
+            };
+            
+            contactos.push(novoContacto);
+            saveToLocalStorage();
+            renderContactos();
+            populateClientSelects();
+            updateDashboard();
+            hideContactModal();
+            
+            alert('Cliente adicionado com sucesso!');
+        }
+
+        // Adicionar atividade
+        function addActivity(event) {
+            event.preventDefault();
+            
+            const novaAtividade = {
+                id: Date.now(),
+                tipo: document.getElementById('tipo-atividade').value,
+                cliente: document.getElementById('cliente-atividade').value,
+                vendedor: 'Gestor',
+                descricao: document.getElementById('comentarios-atividade').value,
+                data: new Date()
+            };
+            
+            atividades.unshift(novaAtividade);
+            saveToLocalStorage();
+            renderAtividades();
+            hideActivityModal();
+            
+            alert('Atividade registada com sucesso!');
+        }
+
+        // Adicionar venda
+        function addSale(event) {
+            event.preventDefault();
+            
+            const novaVenda = {
+                id: Date.now(),
+                cliente: document.getElementById('cliente-venda').value,
+                valor: parseFloat(document.getElementById('valor-venda').value),
+                estado: document.getElementById('estado-venda').value,
+                vendedor: 'Gestor',
+                data: new Date().toLocaleDateString('pt-PT'),
+                descricao: document.getElementById('descricao-venda').value
+            };
+            
+            vendas.push(novaVenda);
+            saveToLocalStorage();
+            renderVendas();
+            updateDashboard();
+            hideSaleModal();
+            
+            alert('Oportunidade criada com sucesso!');
+        }
+
+        // Adicionar empresa
+        function addCompany(event) {
+            event.preventDefault();
+            
+            const novaEmpresa = {
+                id: Date.now(),
+                nome: document.getElementById('nome-empresa').value,
+                telefone: document.getElementById('telefone-empresa').value,
+                email: document.getElementById('email-empresa').value,
+                morada: document.getElementById('morada-empresa').value,
+                website: document.getElementById('website-empresa').value,
+                status: 'Potencial'
+            };
+            
+            empresas.push(novaEmpresa);
+            saveToLocalStorage();
+            renderEmpresas();
+            populateClientSelects();
+            hideCompanyModal();
+            
+            alert('Empresa adicionada com sucesso!');
+        }
+
+        // Editar contacto
+        function editContact(contactId) {
+            const contacto = contactos.find(c => c.id === contactId);
+            if (!contacto) return;
+            
+            // Preencher o formulário com os dados existentes
+            document.getElementById('nome-cliente').value = contacto.nome;
+            document.getElementById('telemovel').value = contacto.telemovel;
+            document.getElementById('email').value = contacto.email;
+            document.getElementById('tipologia').value = contacto.tipologia;
+            document.getElementById('valor-maximo').value = contacto.valorMaximo;
+            document.getElementById('tipo-negocio').value = contacto.tipoNegocio;
+            document.getElementById('tipo-imovel').value = contacto.tipoImovel;
+            
+            // Alterar o título do modal
+            document.querySelector('#contact-modal h3 span:last-child').textContent = 'Editar Cliente Premium';
+            
+            // Alterar o comportamento do formulário
+            const form = document.getElementById('contact-form');
+            form.onsubmit = function(event) {
+                event.preventDefault();
+                updateContact(contactId);
+            };
+            
+            showAddContactModal();
+        }
+
+        // Atualizar contacto
+        function updateContact(contactId) {
+            const contacto = contactos.find(c => c.id === contactId);
+            if (!contacto) return;
+            
+            contacto.nome = document.getElementById('nome-cliente').value;
+            contacto.telemovel = document.getElementById('telemovel').value;
+            contacto.email = document.getElementById('email').value;
+            contacto.tipologia = document.getElementById('tipologia').value;
+            contacto.valorMaximo = parseInt(document.getElementById('valor-maximo').value) || 0;
+            contacto.tipoNegocio = document.getElementById('tipo-negocio').value;
+            contacto.tipoImovel = document.getElementById('tipo-imovel').value;
+            
+            saveToLocalStorage();
+            renderContactos();
+            populateClientSelects();
+            updateDashboard();
+            hideContactModal();
+            
+            // Restaurar o comportamento original do formulário
+            document.getElementById('contact-form').onsubmit = addContact;
+            document.querySelector('#contact-modal h3 span:last-child').textContent = 'Novo Cliente Premium';
+            
+            alert('Cliente atualizado com sucesso!');
+        }
+
+        // Eliminar contacto
+        function deleteContact(contactId) {
+            if (confirm('Tem a certeza que deseja eliminar este contacto?')) {
+                contactos = contactos.filter(c => c.id !== contactId);
+                saveToLocalStorage();
+                renderContactos();
+                populateClientSelects();
+                updateDashboard();
+                alert('Contacto eliminado com sucesso!');
+            }
+        }
+
+        // Editar empresa
+        function editCompany(companyId) {
+            const empresa = empresas.find(e => e.id === companyId);
+            if (!empresa) return;
+            
+            // Preencher o formulário com os dados existentes
+            document.getElementById('nome-empresa').value = empresa.nome;
+            document.getElementById('telefone-empresa').value = empresa.telefone;
+            document.getElementById('email-empresa').value = empresa.email;
+            document.getElementById('morada-empresa').value = empresa.morada || '';
+            document.getElementById('website-empresa').value = empresa.website || '';
+            
+            // Alterar o título do modal
+            document.querySelector('#company-modal h3 span:last-child').textContent = 'Editar Empresa Premium';
+            
+            // Alterar o comportamento do formulário
+            const form = document.getElementById('company-form');
+            form.onsubmit = function(event) {
+                event.preventDefault();
+                updateCompany(companyId);
+            };
+            
+            showAddCompanyModal();
+        }
+
+        // Atualizar empresa
+        function updateCompany(companyId) {
+            const empresa = empresas.find(e => e.id === companyId);
+            if (!empresa) return;
+            
+            empresa.nome = document.getElementById('nome-empresa').value;
+            empresa.telefone = document.getElementById('telefone-empresa').value;
+            empresa.email = document.getElementById('email-empresa').value;
+            empresa.morada = document.getElementById('morada-empresa').value;
+            empresa.website = document.getElementById('website-empresa').value;
+            
+            saveToLocalStorage();
+            renderEmpresas();
+            populateClientSelects();
+            hideCompanyModal();
+            
+            // Restaurar o comportamento original do formulário
+            document.getElementById('company-form').onsubmit = addCompany;
+            document.querySelector('#company-modal h3 span:last-child').textContent = 'Nova Empresa Premium';
+            
+            alert('Empresa atualizada com sucesso!');
+        }
+
+        // Eliminar empresa
+        function deleteCompany(companyId) {
+            if (confirm('Tem a certeza que deseja eliminar esta empresa?')) {
+                empresas = empresas.filter(e => e.id !== companyId);
+                saveToLocalStorage();
+                renderEmpresas();
+                populateClientSelects();
+                alert('Empresa eliminada com sucesso!');
+            }
+        }
+
+        // Eliminar atividade
+        function deleteActivity(activityId) {
+            if (confirm('Tem a certeza que deseja eliminar esta atividade?')) {
+                atividades = atividades.filter(a => a.id !== activityId);
+                saveToLocalStorage();
+                renderAtividades();
+                alert('Atividade eliminada com sucesso!');
+            }
+        }
+
+        // Eliminar venda
+        function deleteSale(saleId) {
+            if (confirm('Tem a certeza que deseja eliminar esta oportunidade?')) {
+                vendas = vendas.filter(v => v.id !== saleId);
+                saveToLocalStorage();
+                renderVendas();
+                updateDashboard();
+                alert('Oportunidade eliminada com sucesso!');
+            }
+        }
+
+        // Atualizar status da venda
+        function updateSaleStatus(vendaId, novoStatus) {
+            const venda = vendas.find(v => v.id === vendaId);
+            if (venda) {
+                venda.estado = novoStatus;
+                saveToLocalStorage();
+                renderVendas();
+                updateDashboard();
+            }
+        }
+
+        // Renderizar contactos
+        function renderContactos(filteredContactos = null) {
+            const grid = document.getElementById('contactos-grid');
+            grid.innerHTML = '';
+            
+            const contactosToRender = filteredContactos || contactos;
+            
+            if (contactosToRender.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <div class="text-white text-6xl mb-6">👥</div>
+                        <h4 class="text-2xl font-bold text-white mb-3">${filteredContactos ? 'Nenhum cliente encontrado' : 'Nenhum cliente registado'}</h4>
+                        <p class="text-white/80 text-lg">${filteredContactos ? 'Tente ajustar os filtros' : 'Adicione o primeiro cliente premium'}</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            contactosToRender.forEach(contacto => {
+                const statusClass = contacto.status === 'Ativo' ? 'luxury-gradient-green text-white' : 
+                                  contacto.status === 'Cliente' ? 'luxury-gradient text-white' : 
+                                  'luxury-gradient-gold text-gray-800';
+                
+                const tipoImovelIcon = {
+                    'apartamento': '🏠',
+                    'moradia': '🏡',
+                    'loja': '🏪',
+                    'garagem': '🚗',
+                    'armazem': '🏭',
+                    'terreno': '🌱'
+                };
+                
+                const valorFormatado = contacto.tipoNegocio === 'arrendamento' ? 
+                    `Até €${contacto.valorMaximo}/mês` : 
+                    `Até €${contacto.valorMaximo?.toLocaleString() || 'N/A'}`;
+                
+                grid.innerHTML += `
+                    <div class="luxury-card rounded-3xl p-8 card-hover">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="flex-1">
+                                <h3 class="font-bold text-xl gradient-text mb-2">${contacto.nome}</h3>
+                                <p class="text-gray-600 font-medium flex items-center space-x-2">
+                                    <span class="text-2xl">${tipoImovelIcon[contacto.tipoImovel] || '🏢'}</span>
+                                    <span>${contacto.tipoImovel?.charAt(0).toUpperCase() + contacto.tipoImovel?.slice(1)} ${contacto.tipologia || ''}</span>
+                                </p>
+                                <p class="text-gray-600 text-sm font-medium mt-1">${contacto.tipoNegocio?.charAt(0).toUpperCase() + contacto.tipoNegocio?.slice(1)}</p>
+                            </div>
+                            <span class="px-4 py-2 ${statusClass} rounded-2xl text-sm font-bold">${contacto.status}</span>
+                        </div>
+                        <div class="space-y-3 text-gray-700 mb-6">
+                            <p class="flex items-center space-x-3 font-medium">
+                                <span class="text-xl">📧</span>
+                                <span>${contacto.email}</span>
+                            </p>
+                            <p class="flex items-center space-x-3 font-medium">
+                                <span class="text-xl">📱</span>
+                                <span>${contacto.telemovel}</span>
+                            </p>
+                            <p class="flex items-center space-x-3 font-medium">
+                                <span class="text-xl">💰</span>
+                                <span>${valorFormatado}</span>
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="scheduleWithClient('${contacto.nome}', '${contacto.telemovel}')" class="luxury-gradient text-white py-3 px-2 rounded-xl text-xs font-bold hover:shadow-lg transition-all">
+                                Agendar
+                            </button>
+                            <button onclick="editContact(${contacto.id})" class="luxury-card text-blue-600 py-3 px-2 rounded-xl text-xs font-bold hover:shadow-lg transition-all">
+                                Editar
+                            </button>
+                            <button onclick="deleteContact(${contacto.id})" class="luxury-card text-red-600 py-3 px-2 rounded-xl text-xs font-bold hover:shadow-lg transition-all">
+                                Eliminar
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Renderizar atividades
+        function renderAtividades() {
+            const timeline = document.getElementById('atividades-timeline');
+            timeline.innerHTML = '';
+            
+            if (atividades.length === 0) {
+                timeline.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="text-white text-6xl mb-6">📝</div>
+                        <h4 class="text-2xl font-bold text-white mb-3">Nenhuma atividade registada</h4>
+                        <p class="text-white/80 text-lg">Adicione a primeira atividade premium</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const tipoIcons = {
+                'chamada': '📞',
+                'reuniao': '🤝',
+                'email': '📧',
+                'visita': '🏠',
+                'visualizacao': '👁️'
+            };
+            
+            const tipoGradients = {
+                'chamada': 'luxury-gradient',
+                'reuniao': 'luxury-gradient-green',
+                'email': 'luxury-gradient-alt',
+                'visita': 'luxury-gradient-gold',
+                'visualizacao': 'bg-gradient-to-r from-gray-500 to-gray-600'
+            };
+            
+            atividades.forEach(atividade => {
+                const gradient = tipoGradients[atividade.tipo] || 'bg-gradient-to-r from-gray-500 to-gray-600';
+                const icon = tipoIcons[atividade.tipo] || '📝';
+                const dataFormatada = atividade.data.toLocaleDateString('pt-PT') + ' às ' + atividade.data.toLocaleTimeString('pt-PT', {hour: '2-digit', minute: '2-digit'});
+                
+                timeline.innerHTML += `
+                    <div class="flex items-start space-x-6 luxury-card rounded-2xl p-6 border-l-8 border-purple-500">
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 ${gradient} rounded-2xl flex items-center justify-center shadow-lg">
+                                <span class="text-white text-2xl">${icon}</span>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-xl gradient-text">${atividade.tipo.charAt(0).toUpperCase() + atividade.tipo.slice(1)} - ${atividade.cliente}</h4>
+                                <div class="flex items-center space-x-4">
+                                    <span class="text-gray-600 font-medium">${dataFormatada}</span>
+                                    <button onclick="deleteActivity(${atividade.id})" class="text-red-500 hover:text-red-700 font-bold text-xl transition-colors">✕</button>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 font-medium mb-4">${atividade.descricao}</p>
+                            <div class="flex items-center space-x-6">
+                                <span class="text-sm text-gray-600 font-medium flex items-center space-x-2">
+                                    <span class="text-lg">👤</span>
+                                    <span>${atividade.vendedor}</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Renderizar vendas
+        function renderVendas() {
+            const table = document.getElementById('vendas-table');
+            table.innerHTML = '';
+            
+            if (vendas.length === 0) {
+                table.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="py-12 text-center text-gray-400">
+                            <div class="text-4xl mb-4">💎</div>
+                            <p class="text-lg font-medium">Nenhuma oportunidade registada</p>
+                            <p class="text-sm mt-2">Clique em "Nova Oportunidade" para começar</p>
+                        </td>
+                    </tr>
+                `;
+                clearFunil();
+                return;
+            }
+            
+            vendas.forEach(venda => {
+                const statusClass = getStatusClass(venda.estado);
+                
+                table.innerHTML += `
+                    <tr class="border-b-2 border-gray-100 hover:bg-gray-50 transition-colors">
+                        <td class="py-4 px-6 font-bold text-lg">${venda.cliente}</td>
+                        <td class="py-4 px-6 font-bold text-lg text-green-600">€${venda.valor.toLocaleString()}</td>
+                        <td class="py-4 px-6">
+                            <select class="${statusClass} px-4 py-2 rounded-2xl text-sm font-bold border-0 focus:outline-none" onchange="updateSaleStatus(${venda.id}, this.value)">
+                                <option value="novo" ${venda.estado === 'novo' ? 'selected' : ''}>Novo</option>
+                                <option value="em-negociacao" ${venda.estado === 'em-negociacao' ? 'selected' : ''}>Em Negociação</option>
+                                <option value="proposta-enviada" ${venda.estado === 'proposta-enviada' ? 'selected' : ''}>Proposta Enviada</option>
+                                <option value="ganho" ${venda.estado === 'ganho' ? 'selected' : ''}>Ganho</option>
+                                <option value="perdido" ${venda.estado === 'perdido' ? 'selected' : ''}>Perdido</option>
+                            </select>
+                        </td>
+                        <td class="py-4 px-6 text-gray-600 font-medium">${venda.data}</td>
+                        <td class="py-4 px-6">
+                            <button onclick="deleteSale(${venda.id})" class="text-red-600 hover:text-red-800 font-bold transition-colors">Eliminar</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            renderFunilVendas();
+        }
+
+        // Renderizar empresas
+        function renderEmpresas() {
+            const grid = document.getElementById('companies-grid');
+            grid.innerHTML = '';
+            
+            if (empresas.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <div class="text-white text-6xl mb-6">🏢</div>
+                        <h4 class="text-2xl font-bold text-white mb-3">Nenhuma empresa registada</h4>
+                        <p class="text-white/80 text-lg">Adicione a primeira empresa premium</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            empresas.forEach(empresa => {
+                const statusClass = empresa.status === 'Ativo' ? 'luxury-gradient-green text-white' : 
+                                  empresa.status === 'Cliente' ? 'luxury-gradient text-white' : 
+                                  'luxury-gradient-gold text-gray-800';
+                
+                grid.innerHTML += `
+                    <div class="luxury-card rounded-3xl p-8 card-hover">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="flex-1">
+                                <h4 class="font-bold text-xl gradient-text mb-2">${empresa.nome}</h4>
+                                <p class="text-gray-600 font-medium flex items-center space-x-2">
+                                    <span class="text-2xl">🏢</span>
+                                    <span>Empreendimento Premium</span>
+                                </p>
+                            </div>
+                            <span class="px-4 py-2 ${statusClass} rounded-2xl text-sm font-bold">${empresa.status}</span>
+                        </div>
+                        <div class="space-y-3 text-gray-700 mb-6">
+                            <p class="flex items-center space-x-3 font-medium">
+                                <span class="text-xl">📧</span>
+                                <span>${empresa.email}</span>
+                            </p>
+                            <p class="flex items-center space-x-3 font-medium">
+                                <span class="text-xl">📱</span>
+                                <span>${empresa.telefone}</span>
+                            </p>
+                            ${empresa.morada ? `<p class="flex items-start space-x-3 font-medium"><span class="text-xl">📍</span><span>${empresa.morada}</span></p>` : ''}
+                            ${empresa.website ? `<p class="flex items-center space-x-3 font-medium"><span class="text-xl">🌐</span><a href="${empresa.website}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 font-bold transition-colors">${empresa.website}</a></p>` : ''}
+                        </div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="scheduleWithClient('${empresa.nome}', '${empresa.telefone}')" class="luxury-gradient-green text-white py-3 px-2 rounded-xl text-xs font-bold hover:shadow-lg transition-all">
+                                Agendar
+                            </button>
+                            <button onclick="editCompany(${empresa.id})" class="luxury-card text-blue-600 py-3 px-2 rounded-xl text-xs font-bold hover:shadow-lg transition-all">
+                                Editar
+                            </button>
+                            <button onclick="deleteCompany(${empresa.id})" class="luxury-card text-red-600 py-3 px-2 rounded-xl text-xs font-bold hover:shadow-lg transition-all">
+                                Eliminar
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Renderizar funil de vendas
+        function renderFunilVendas() {
+            const vendasPorEstado = {
+                'novo': vendas.filter(v => v.estado === 'novo'),
+                'em-negociacao': vendas.filter(v => v.estado === 'em-negociacao'),
+                'proposta-enviada': vendas.filter(v => v.estado === 'proposta-enviada'),
+                'ganho': vendas.filter(v => v.estado === 'ganho'),
+                'perdido': vendas.filter(v => v.estado === 'perdido')
+            };
+
+            Object.keys(vendasPorEstado).forEach(estado => {
+                const vendas = vendasPorEstado[estado];
+                const count = vendas.length;
+                const total = vendas.reduce((sum, v) => sum + v.valor, 0);
+                
+                let elementId = estado;
+                if (estado === 'em-negociacao') elementId = 'negociacao';
+                if (estado === 'proposta-enviada') elementId = 'proposta';
+                
+                const countElement = document.getElementById(`count-${elementId}`);
+                if (countElement) countElement.textContent = count;
+                
+                const totalElement = document.getElementById(`total-${elementId}`);
+                if (totalElement) totalElement.textContent = `€${total.toLocaleString()}`;
+                
+                renderFunilCards(estado, vendas);
+            });
+        }
+
+        // Renderizar cards no funil
+        function renderFunilCards(estado, vendas) {
+            let containerId = estado;
+            if (estado === 'em-negociacao') containerId = 'negociacao';
+            if (estado === 'proposta-enviada') containerId = 'proposta';
+            
+            const container = document.getElementById(`funil-${containerId}`);
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            if (vendas.length === 0) {
+                container.innerHTML = `
+                    <div class="p-8 text-center text-gray-400">
+                        <p class="font-medium">Nenhum cliente nesta fase</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            vendas.forEach(venda => {
+                const card = document.createElement('div');
+                card.className = 'luxury-card rounded-2xl p-4 hover:shadow-lg transition-all cursor-pointer';
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-3">
+                        <h4 class="font-bold text-gray-900">${venda.cliente}</h4>
+                    </div>
+                    <p class="text-lg font-bold text-green-600 mb-2">€${venda.valor.toLocaleString()}</p>
+                    <p class="text-sm text-gray-500 font-medium">${venda.data}</p>
+                    ${venda.descricao ? `<p class="text-sm text-gray-600 mt-2 italic">${venda.descricao.substring(0, 50)}${venda.descricao.length > 50 ? '...' : ''}</p>` : ''}
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        // Limpar funil
+        function clearFunil() {
+            const estados = ['novo', 'negociacao', 'proposta', 'ganho', 'perdido'];
+            estados.forEach(estado => {
+                const countElement = document.getElementById(`count-${estado}`);
+                const totalElement = document.getElementById(`total-${estado}`);
+                const container = document.getElementById(`funil-${estado}`);
+                
+                if (countElement) countElement.textContent = '0';
+                if (totalElement) totalElement.textContent = '€0';
+                if (container) {
+                    container.innerHTML = `
+                        <div class="p-8 text-center text-gray-400">
+                            <p class="font-medium">Nenhum cliente nesta fase</p>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        // Obter classe CSS para status
+        function getStatusClass(status) {
+            const classes = {
+                'novo': 'status-novo',
+                'em-negociacao': 'status-em-negociacao',
+                'proposta-enviada': 'status-proposta-enviada',
+                'ganho': 'status-ganho',
+                'perdido': 'status-perdido'
+            };
+            return classes[status] || 'status-novo';
+        }
+
+        // Atualizar dashboard
+        function updateDashboard() {
+            const vendasGanhas = vendas.filter(v => v.estado === 'ganho');
+            const totalVendas = vendasGanhas.reduce((sum, v) => sum + v.valor, 0);
+            const negociosFechados = vendasGanhas.length;
+            const emNegociacao = vendas.filter(v => v.estado === 'em-negociacao').length;
+            const contactosAtivos = contactos.filter(c => c.status === 'Ativo').length;
+
+            document.getElementById('total-vendas').textContent = `€${totalVendas.toLocaleString()}`;
+            document.getElementById('negocios-fechados').textContent = negociosFechados;
+            document.getElementById('em-negociacao').textContent = emNegociacao;
+            document.getElementById('contactos-ativos').textContent = contactosAtivos;
+        }
+
+        // Popular selects de clientes
+        function populateClientSelects() {
+            const allClients = [...contactos.map(c => c.nome), ...empresas.map(e => e.nome)];
+            
+            const clienteAtividadeSelect = document.getElementById('cliente-atividade');
+            const clienteVendaSelect = document.getElementById('cliente-venda');
+            
+            clienteAtividadeSelect.innerHTML = '<option value="">Selecionar cliente</option>';
+            clienteVendaSelect.innerHTML = '<option value="">Selecionar cliente</option>';
+            
+            allClients.forEach(cliente => {
+                clienteAtividadeSelect.innerHTML += `<option value="${cliente}">${cliente}</option>`;
+                clienteVendaSelect.innerHTML += `<option value="${cliente}">${cliente}</option>`;
+            });
+        }
+
+        // Filtrar contactos
+        function filterContactos() {
+            const tipologia = document.getElementById('filter-tipologia').value;
+            const tipoNegocio = document.getElementById('filter-tipo-negocio').value;
+            const tipoImovel = document.getElementById('filter-tipo-imovel').value;
+            const preco = document.getElementById('filter-preco').value;
+            const search = document.getElementById('search-contactos').value.toLowerCase();
+
+            let filtered = contactos.filter(contacto => {
+                let matches = true;
+
+                if (tipologia && contacto.tipologia !== tipologia) matches = false;
+                if (tipoNegocio && contacto.tipoNegocio !== tipoNegocio) matches = false;
+                if (tipoImovel && contacto.tipoImovel !== tipoImovel) matches = false;
+                
+                if (preco) {
+                    const [min, max] = preco.split('-').map(Number);
+                    if (max && (contacto.valorMaximo < min || contacto.valorMaximo > max)) matches = false;
+                    if (!max && contacto.valorMaximo < min) matches = false;
+                }
+                
+                if (search && !contacto.nome.toLowerCase().includes(search) && 
+                    !contacto.email.toLowerCase().includes(search)) matches = false;
+
+                return matches;
+            });
+
+            renderContactos(filtered);
+        }
+
+        // Renderizar tudo
+        function renderAll() {
+            renderContactos();
+            renderAtividades();
+            renderVendas();
+            renderEmpresas();
+        }
+
+        // Abrir Google Calendar
+        function openGoogleCalendar() {
+            window.open('https://calendar.google.com/calendar/embed?src=susana.freire78%40gmail.com&ctz=Europe%2FLisbon', '_blank', 'noopener,noreferrer');
+        }
+
+        // Agendar com cliente
+        function scheduleWithClient(nome, telefone) {
+            const subject = encodeURIComponent(`Reunião com ${nome}`);
+            const details = encodeURIComponent(`Reunião agendada com ${nome}\nTelefone: ${telefone}\n\nDetalhes a definir.`);
+            const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${subject}&details=${details}&sf=true&output=xml`;
+            window.open(calendarUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        // Sistema de Backup
+        function startAutoBackup() {
+            // Criar backup inicial
+            createAutoBackup();
+            
+            // Configurar backup automático a cada 30 segundos
+            setInterval(() => {
+                createAutoBackup();
+            }, 30000); // 30 segundos
+        }
+
+        function createAutoBackup() {
+            const backupData = {
+                contactos,
+                empresas,
+                atividades: atividades.map(a => ({...a, data: a.data.toISOString()})),
+                vendas,
+                timestamp: new Date().toISOString(),
+                type: 'automático',
+                id: Date.now()
+            };
+
+            const backups = JSON.parse(localStorage.getItem('crm_backups') || '[]');
+            backups.unshift(backupData);
+            
+            // Manter apenas os últimos 20 backups
+            if (backups.length > 20) {
+                backups.splice(20);
+            }
+            
+            localStorage.setItem('crm_backups', JSON.stringify(backups));
+            document.getElementById('last-backup-time').textContent = new Date().toLocaleString('pt-PT');
+            
+            // Atualizar lista se o modal estiver aberto
+            if (!document.getElementById('backup-modal').classList.contains('hidden')) {
+                renderBackupList();
+            }
+        }
+
+        function createManualBackup() {
+            const backupData = {
+                contactos,
+                empresas,
+                atividades: atividades.map(a => ({...a, data: a.data.toISOString()})),
+                vendas,
+                timestamp: new Date().toISOString(),
+                type: 'manual',
+                id: Date.now()
+            };
+
+            const backups = JSON.parse(localStorage.getItem('crm_backups') || '[]');
+            backups.unshift(backupData);
+            
+            // Manter apenas os últimos 20 backups
+            if (backups.length > 20) {
+                backups.splice(20);
+            }
+            
+            localStorage.setItem('crm_backups', JSON.stringify(backups));
+
+            // Atualizar display
+            document.getElementById('last-backup-time').textContent = new Date().toLocaleString('pt-PT');
+            renderBackupList();
+
+            alert('Backup manual criado com sucesso!');
+        }
+
+        function renderBackupList() {
+            const backups = JSON.parse(localStorage.getItem('crm_backups') || '[]');
+            const container = document.getElementById('backup-list');
+            
+            if (backups.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-gray-400">
+                        <div class="text-4xl mb-4">💾</div>
+                        <p class="font-medium">Nenhum backup encontrado</p>
+                        <p class="text-sm mt-2">Os backups automáticos começarão em breve</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = '';
+            
+            backups.forEach((backup, index) => {
+                const date = new Date(backup.timestamp);
+                const formattedDate = date.toLocaleDateString('pt-PT');
+                const formattedTime = date.toLocaleTimeString('pt-PT', {hour: '2-digit', minute: '2-digit', second: '2-digit'});
+                
+                const typeIcon = backup.type === 'manual' ? '👤' : '🤖';
+                const typeColor = backup.type === 'manual' ? 'text-blue-600' : 'text-green-600';
+                
+                const totalItems = (backup.contactos?.length || 0) + (backup.empresas?.length || 0) + 
+                                 (backup.atividades?.length || 0) + (backup.vendas?.length || 0);
+
+                const backupCard = document.createElement('div');
+                backupCard.className = 'luxury-card rounded-xl p-4 mb-3 border-l-4 border-purple-500 hover:shadow-lg transition-all';
+                backupCard.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <span class="text-2xl">${typeIcon}</span>
+                                <div>
+                                    <h5 class="font-bold text-gray-900 ${typeColor}">Backup ${backup.type}</h5>
+                                    <p class="text-sm text-gray-600 font-medium">${formattedDate} às ${formattedTime}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 text-sm text-gray-600">
+                                <span class="flex items-center space-x-1">
+                                    <span class="text-lg">👥</span>
+                                    <span>${backup.contactos?.length || 0} contactos</span>
+                                </span>
+                                <span class="flex items-center space-x-1">
+                                    <span class="text-lg">🏢</span>
+                                    <span>${backup.empresas?.length || 0} empresas</span>
+                                </span>
+                                <span class="flex items-center space-x-1">
+                                    <span class="text-lg">📝</span>
+                                    <span>${backup.atividades?.length || 0} atividades</span>
+                                </span>
+                                <span class="flex items-center space-x-1">
+                                    <span class="text-lg">💰</span>
+                                    <span>${backup.vendas?.length || 0} vendas</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 ml-4">
+                            <button onclick="downloadBackup(${index})" class="luxury-gradient text-white px-4 py-2 rounded-xl text-sm font-bold hover:shadow-lg transition-all flex items-center space-x-2">
+                                <span class="text-lg">📥</span>
+                                <span>Download</span>
+                            </button>
+                            <button onclick="restoreBackup(${index})" class="luxury-gradient-green text-white px-4 py-2 rounded-xl text-sm font-bold hover:shadow-lg transition-all flex items-center space-x-2">
+                                <span class="text-lg">🔄</span>
+                                <span>Restaurar</span>
+                            </button>
+                            ${backup.type === 'manual' ? `<button onclick="deleteBackup(${index})" class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-xl text-sm font-bold transition-all">🗑️</button>` : ''}
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(backupCard);
+            });
+        }
+
+        function downloadBackup(index) {
+            const backups = JSON.parse(localStorage.getItem('crm_backups') || '[]');
+            const backup = backups[index];
+            
+            if (!backup) {
+                alert('Backup não encontrado!');
+                return;
+            }
+
+            const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            
+            const date = new Date(backup.timestamp);
+            const dateStr = date.toISOString().split('T')[0];
+            const timeStr = date.toTimeString().split(' ')[0].replace(/:/g, '-');
+            
+            a.download = `crm-backup-${backup.type}-${dateStr}-${timeStr}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            alert('Backup descarregado com sucesso!');
+        }
+
+        function restoreBackup(index) {
+            const backups = JSON.parse(localStorage.getItem('crm_backups') || '[]');
+            const backup = backups[index];
+            
+            if (!backup) {
+                alert('Backup não encontrado!');
+                return;
+            }
+
+            const date = new Date(backup.timestamp);
+            const formattedDate = date.toLocaleDateString('pt-PT') + ' às ' + date.toLocaleTimeString('pt-PT');
+            
+            if (confirm(`Tem a certeza que deseja restaurar o backup de ${formattedDate}?\n\nTodos os dados atuais serão substituídos pelos dados do backup selecionado.`)) {
+                contactos = backup.contactos || [];
+                empresas = backup.empresas || [];
+                atividades = (backup.atividades || []).map(a => ({...a, data: new Date(a.data)}));
+                vendas = backup.vendas || [];
+                
+                saveToLocalStorage();
+                renderAll();
+                updateDashboard();
+                populateClientSelects();
+                
+                alert('Backup restaurado com sucesso!');
+                hideBackupModal();
+            }
+        }
+
+        function deleteBackup(index) {
+            if (confirm('Tem a certeza que deseja eliminar este backup?')) {
+                const backups = JSON.parse(localStorage.getItem('crm_backups') || '[]');
+                backups.splice(index, 1);
+                localStorage.setItem('crm_backups', JSON.stringify(backups));
+                renderBackupList();
+                alert('Backup eliminado com sucesso!');
+            }
+        }
+
+        function refreshBackupList() {
+            renderBackupList();
+            updateBackupInfo();
+        }
+
+        function restoreFromFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const backupData = JSON.parse(e.target.result);
+                    
+                    if (confirm('Tem a certeza que deseja restaurar este backup externo? Todos os dados atuais serão substituídos.')) {
+                        contactos = backupData.contactos || [];
+                        empresas = backupData.empresas || [];
+                        atividades = (backupData.atividades || []).map(a => ({...a, data: new Date(a.data)}));
+                        vendas = backupData.vendas || [];
+                        
+                        saveToLocalStorage();
+                        renderAll();
+                        updateDashboard();
+                        populateClientSelects();
+                        
+                        alert('Backup externo restaurado com sucesso!');
+                        hideBackupModal();
+                    }
+                } catch (error) {
+                    alert('Erro ao restaurar backup. Ficheiro inválido.');
+                }
+            };
+            reader.readAsText(file);
+            
+            // Limpar o input
+            event.target.value = '';
+        }
+
+        function updateBackupInfo() {
+            document.getElementById('info-contactos').textContent = contactos.length;
+            document.getElementById('info-empresas').textContent = empresas.length;
+            document.getElementById('info-atividades').textContent = atividades.length;
+            document.getElementById('info-vendas').textContent = vendas.length;
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'988694772544f369',t:'MTc1OTQzMzA2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
